@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><!--th:include="head :: jquery"-->
+    <title>learn Resources</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script th:replace="head :: jquery" th:remove="tag"></script>
+</head>
+<body>
+<div th:replace="head :: head"></div>
+<div style="text-align: center;margin:0 auto;width: 1000px; ">
+    <h3>（javaLearn）</h3>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0" th:remove="none"><!--all-but-first-->
+        <tr>
+            <td>no</td>
+            <td>uuid</td>
+            <td>nsrsbh</td>
+            <td>sx</td>
+            <td>cjsj</td>
+            <td>zt</td>
+        </tr>
+        <tr th:each="bs,iterStat : ${ssfwBsList}">
+            <td th:text="${iterStat.index + 1}">no</td>
+            <td th:text="|(${bs.uuid})|">author</td>
+            <td th:text="${bs.nsrsbh}">SPringBoot</td>
+            <td th:text="${bs.sx}">SPringBoot</td>
+            <td th:text="${bs.cjsj}">SPringBoot</td>
+            <td th:text="${bs.zt}">SPringBoot</td>
+        </tr>
+        <tr th:remove="all">
+            <td>author</td>
+            <td>SPringBoot</td>
+            <td>SPringBoot</td>
+            <td>SPringBoot</td>
+            <td>SPringBoot</td>
+        </tr>
+    </table>
+    <a th:href="@{http://www.baidu.com/}" target="_blank">绝对路径</a>
+    <a th:href="@{/js/jquery.min.js}" target="_blank">相对路径</a>
+    <a th:with="isEven=(3 % 2 == 999)" th:text="${isEven}">th:with="isEven=(${count1} % 2 == 0)"</a>
+    <div th:if="true">if:true</div>
+    <div th:if="false">if:false</div>
+    <div th:switch="1">
+        <span th:case="1" th:text="${author}">1</span>
+        <span th:case="2">2</span>
+        <span th:case="3">3</span>
+    </div>
+    <div th:text="${#numbers.formatDecimal(1.238567,1,2)}">number</div>
+    <div th:text="${'date:'+#dates.format(now,'yyyy-MM-dd')}">date</div>
+    <div th:utext="${html}">转义文本</div>
+    <!--<input type="text" th:field="${'fileld:'+title}"/>-->
+    <input type="text" th:value="${'value:'+title}"/>
+</div>
+</body>
+</html>
