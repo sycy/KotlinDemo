@@ -1,5 +1,11 @@
 package com.ybb.controller;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.StreamProgress;
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.ReUtil;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
 import com.ybb.annotation.UserAnnotation;
 import com.ybb.dao.SsfwBsDao;
 import com.ybb.entity.SsfwBs;
@@ -34,6 +40,14 @@ public class ThymeleafController {
         PageRequest page = new PageRequest(1, 10, sort);
         Page<SsfwBs> ssfwBsPage = dao.findAll(page);
         model.addAttribute("ssfwBsList",ssfwBsPage.getContent());
+        /*String body = HttpRequest.get("https://www.baidu.com/index.php").execute().body();
+        Console.log(body);*/
+        String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516682478331&di=" +
+                "cffce368026b6727c99440b2b97f6f26&imgtype=0&src=http%3A%2F%2Fimg2.niutuku.com%2F1312%2F0827" +
+                "%2F0827-niutuku.com-13638.jpg";
+        String deskUrl = "C://Users/yuanbenben/Desktop/image01.jpg";
+        long size = HttpUtil.download(url, FileUtil.getOutputStream(deskUrl), true);
+        System.out.println("Download size: " + size);
         return "index";
     }
 
